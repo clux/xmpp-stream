@@ -2,12 +2,16 @@
   "name": "xmpp-stream",
   "description": "A duplex streaming XMPP client",
   "author": "Eirik Albrigtsen <analsandblaster@gmail.com>",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "repository": {
     "type": "git",
     "url": "clux/xmpp-stream"
   },
-  "keywords": ["gu", "simple", "bot"],
+  "keywords": [
+    "gu",
+    "simple",
+    "bot"
+  ],
   "main": "xmpp-stream.js",
   "scripts": {
     "test": "nodeunit --reporter=verbose test/*.js",
