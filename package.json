@@ -1,0 +1,31 @@
+{
+  "name": "xmpp-stream",
+  "description": "A duplex XMPP client",
+  "author": "Eirik Albrigtsen <analsandblaster@gmail.com>",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "clux/xmpp-stream"
+  },
+  "keywords": [],
+  "main": "xmpp_stream.js",
+  "scripts": {
+    "test": "nodeunit --reporter=verbose test/*.js",
+    "precoverage": "jscoverage xmpp_stream.js",
+    "coverage": "XMPP_STREAM_COV=1 nodeunit --reporter=lcov test/*.js",
+    "coveralls": "npm run coverage | coveralls"
+  },
+  "dependencies": {
+    "simple-xmpp": "^0.1.92",
+    "smell": "^2.0.2"
+  },
+  "devDependencies": {
+    "nodeunit": "^0.9.1",
+    "jscoverage": "^0.5.9",
+    "coveralls": "^2.11.2"
+  },
+  "bugs": {
+    "url": "http://github.com/clux/xmpp-stream/issues"
+  },
+  "license": "MIT"
+}
