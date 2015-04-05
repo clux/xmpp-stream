@@ -19,11 +19,11 @@ Ideally, use it with [gu](https://npmjs.org/package/gu) as both a readable and w
 
 ```js
 var xmppParams = {
-  jid : username@gmail.com,
+  jid : 'username@gmail.com',
   password : password,
   host : 'talk.google.com',
   port : 5222
-}
+};
 var xmppStream = require('xmpp-stream')(xmppParams, opts);
 var gu = require('gu')(scriptPath, scriptFiles);
 
@@ -41,6 +41,7 @@ The second argument control how we listen and respond on XMPP. By default the fo
 ```js
 {
   answerPms: Boolean, // respond to private messages
+  friends: [], // array of friend jids to subscribe to
 }
 ```
 
