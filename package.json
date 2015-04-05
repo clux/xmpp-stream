@@ -24,6 +24,7 @@
     "smell": "^2.0.2"
   },
   "devDependencies": {
+    "sulfur": "^1.0.0",
     "nodeunit": "^0.9.1",
     "jscoverage": "^0.5.9",
     "coveralls": "^2.11.2"
