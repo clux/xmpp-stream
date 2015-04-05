@@ -25,7 +25,6 @@ function XmppStream(xmppParams, opts) {
   this.bot.on('online', function (data) {
     var jid = data.jid.user;
     self.log.info('connected as', jid);
-    self.bot.send('hodderrebecca@gmail.com', 'hi there');
   });
   this.bot.on('chat', function (from, text) {
     var msg = text.trim();
