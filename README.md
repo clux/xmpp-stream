@@ -36,12 +36,12 @@ Alternatively you could use it as just a readable stream or a writable stream. S
 
 
 ## Options
-The second argument control how we listen and respond on XMPP. By default the following options are all disabled or zero:
+The second argument control how we listen and respond on XMPP. By default the following options are all disabled or empty:
 
 ```js
 {
   answerPms: Boolean, // respond to private messages
-  friends: [], // array of friend jids to subscribe to
+  friends: [String], // array of friend jids to subscribe to
 }
 ```
 
