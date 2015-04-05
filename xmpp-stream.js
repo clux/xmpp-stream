@@ -8,6 +8,7 @@ function XmppStream(xmppParams, opts) {
   }
   Duplex.call(this, { objectMode: true });
   this.opts = opts || {};
+  this.opts.friends = opts.friends || [];
   this.log = new Smell();
   this.name = xmppParams.jid.split('@')[0];
 
@@ -16,12 +17,15 @@ function XmppStream(xmppParams, opts) {
   this.bot = new Client();
   this.bot.on('error', this.log.error);
   this.bot.connect(xmppParams);
-  this.bot.subscribe('analsandblaster@gmail.com');
+  this.opts.friends.forEach(function (f) {
+    self.bot.subscribe(f);
+  });
   this.bot.getRoster();
 
   this.bot.on('online', function (data) {
     var jid = data.jid.user;
     self.log.info('connected as', jid);
+    self.bot.send('***REMOVED***', 'hi there');
   });
   this.bot.on('chat', function (from, text) {
     var msg = text.trim();
@@ -31,18 +35,16 @@ function XmppStream(xmppParams, opts) {
       self.push(o);
     }
   });
-  this.bot.on('groupchat', function (conf, from, text, time) {
-    self.log.info('%s says %s on %s on %s at %s',
-      from,
-      text,
-      conf,
-      time.substr(0,9),
-      time.substr(10)
-    );
+  this.bot.on('groupchat', function (conf, from, text) {
+    var o = {user: from, channel: conf, message: text};
+    self.log.info("Incoming Chan: %j", o);
+    self.push(o);
   });
   this.bot.on('subscribe', function (from) {
     self.log.info('subscribe', from);
-    self.bot.acceptSubscription(from);
+    if (self.opts.friends.indexOf(from) >= 0) {
+      self.bot.acceptSubscription(from);
+    }
   });
 }
 XmppStream.prototype = Object.create(Duplex.prototype);
@@ -52,7 +54,12 @@ XmppStream.prototype._write = function (obj, enc, cb) {
   if (obj.user == null || obj.message == null) {
     throw new Error("Improper object written to XmppStream");
   }
-  this.bot.send(obj.user, 'echo: ' + obj.message);
+  if (!obj.channel) {
+    this.bot.send(obj.user, obj.message);
+  }
+  else {
+    this.bot.send(obj.channel, obj.message);
+  }
   cb();
 };
 
