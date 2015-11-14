@@ -1,4 +1,4 @@
-var Client = require('simple-xmpp').SimpleXMPP;
+var Client = require('node-xmpp-client');
 var Duplex = require('stream').Duplex;
 var Smell = require('smell');
 
@@ -14,9 +14,8 @@ function XmppStream(xmppParams, opts) {
 
   var self = this;
 
-  this.bot = new Client();
+  this.bot = new Client(xmppParams);
   this.bot.on('error', this.log.error);
-  this.bot.connect(xmppParams);
   this.opts.friends.forEach(function (f) {
     self.bot.subscribe(f);
   });

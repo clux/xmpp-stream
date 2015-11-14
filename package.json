@@ -20,7 +20,7 @@
     "coveralls": "npm run coverage | coveralls"
   },
   "dependencies": {
-    "simple-xmpp": "^0.1.92",
+    "node-xmpp-client": "^2.0.2",
     "smell": "^2.0.2"
   },
   "devDependencies": {
